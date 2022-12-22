@@ -14,13 +14,16 @@
         padding: 0;
         overflow: hidden;
     }
+
     * {
         box-sizing: border-box;
     }
+
     .form-group {
         position: relative;
 
     }
+
     #countsArea {
         position: fixed;
         bottom: 0px;
@@ -51,9 +54,17 @@
         //counting characters
         const cFun = () => {
             let char = document.getElementById('myTextarea').value;
+            char = char.split(/\r|\r\n|\n/);
             if (char == null) { return 0; }
-            else { return char.length; }
+            else {
+                let count = 0;
+                for (let i = 0; i < char.length; i++) {
+                    count += char[i].length;
+                }
+                return count;
+            }
         };
+
         //counting words
         const wFun = () => {
             let words = document.getElementById("myTextarea").value;
@@ -69,7 +80,7 @@
             else { return lines.length; }
         };
         //displaying the count
-        document.getElementById('countsArea').innerHTML = cFun() + "C" + "\n" + wFun() + "W" + "\n" + lFun() + "L";
+        document.getElementById('countsArea').innerHTML = cFun() + "C" + " " + wFun() + "W" + " " + lFun() + "L";
     };
     myTextarea.addEventListener("input", count);
 </script>
