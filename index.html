@@ -1,1 +1,75 @@
-Hello World
+<style>
+    html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    .form-group {
+        position: relative;
+
+    }
+    #countsArea {
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        text-align: center;
+        padding-right: 5px;
+
+        max-width: none;
+        display: inline-block;
+    }
+
+    #myTextarea {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        overflow: hidden;
+
+    }
+</style>
+<div class="form-group">
+    <div id="countsArea">0C 0W 0L</div>
+    <textarea id="myTextarea"></textarea>
+
+</div>
+<script>
+
+    const count = () => {
+        //counting characters
+        const cFun = () => {
+            let char = document.getElementById('myTextarea').value;
+            if (char == null) { return 0; }
+            else { return char.length; }
+        };
+        //counting words
+        const wFun = () => {
+            let words = document.getElementById("myTextarea").value;
+            words = words.match(/\w+/g);
+            if (words == null) { return 0; }
+            else { return words.length; }
+        };
+        //counting lines
+        const lFun = () => {
+            let lines = document.getElementById("myTextarea").value
+            lines = lines.split(/\r|\r\n|\n/);
+            if (lines == null) { return 0; }
+            else { return lines.length; }
+        };
+        //displaying the count
+        document.getElementById('countsArea').innerHTML = cFun() + "C" + "\n" + wFun() + "W" + "\n" + lFun() + "L";
+    };
+    myTextarea.addEventListener("input", count);
+</script>
